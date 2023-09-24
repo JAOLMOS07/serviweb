@@ -1,0 +1,84 @@
+<div class="container">
+  <div
+    class="row justify-content-center align-items-center"
+    style="min-height: 100vh"
+  >
+    <div class="col-6 col-sm-8 col-lg-6">
+      <div class="bg-white shadow rounded py-3 px-4">
+        <h1 class="text-center display-4 mb-0">Iniciar Sesión</h1>
+        <hr />
+        <form class="j" [formGroup]="form" (ngSubmit)="submit()">
+          <div class="form-floating m-3">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              placeholder="name@example.com"
+              name="email"
+              value=""
+              required
+              autocomplete="email"
+
+            />
+            <label for="email">Email</label>
+            <div
+              *ngIf="f['email'].touched && f['email'].invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f['email'].errors?.['required']">
+                *Debe proporcionar un email.
+              </div>
+              <div *ngIf="f['email'].errors?.['email']">
+                *No es un Email válido.
+              </div>
+            </div>
+          </div>
+          <div class="form-floating m-3">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              placeholder="Password"
+              name="password"
+              value=""
+              required
+              autocomplete="password"
+
+            />
+            <label for="password">Contraseña</label>
+            <div
+              *ngIf="f['password'].touched && f['password'].invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f['password'].errors?.['required']">
+                *Debe proporcionar una contraseña.
+              </div>
+
+            </div>
+          </div>
+          <div class="row m-3">
+            <div class="col-12 text-center">
+              <button
+                class="btn btn-primary col-6"
+                type="submit"
+                [disabled]="!form.valid"
+              >
+                Ingresar
+              </button>
+            </div>
+          </div>
+          <div class="row m-3">
+            <a
+              class="text-center"
+              routerLink="/register"
+              >Crea una Cuenta.</a
+            >
+          </div>
+        </form>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>

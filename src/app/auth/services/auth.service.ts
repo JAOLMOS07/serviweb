@@ -1,0 +1,96 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Credentials, Token, User,status, RegisterCredentials } from '../user';
+
+@Injectable()
+export class AuthService {
+  //dirección http base de mi API
+  private apiURL = 'http://apiserviapp.test/api/v1/';
+
+  //Headers de mi peticion http
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+  constructor(private http: HttpClient) {}
+
+  //Tomar token del local storage----------------------------------------------------------------
+  getToken(): string {
+    return JSON.parse(localStorage.getItem('token') || '{}');
+  }
+
+  //Guardar token en el local storage------------------------------------------------------------
+  setToken(token: Token): void {
+    localStorage.setItem('token', JSON.stringify(token.token));
+  }
+
+  //Borrar local storage-------------------------------------------------------------------------
+  deleteToken(): void {
+    localStorage.removeItem('token');
+  }
+
+  //Petición GET para obtener el usuario que está con la sesión activa---------------------------
+  getUser(token: Token): Observable<Token> {
+    console.log("funcion",token)
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token.token}`,
+      }),
+    };
+    return this.http
+      .post<Token>(this.apiURL + 'get-user', token, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+//Petición GET para verificar el token-------------------------------------------------------------
+validateToken(token: Token): Observable<boolean> {
+
+  this.httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token.token}`,
+    }),
+  };
+  return this.http
+    .post(this.apiURL + 'validatetoken', token, this.httpOptions)
+    .pipe(map((resp:any) => resp.status !== 'ok'),catchError(this.errorHandler));
+}
+  //Peición POST logout--------------------------------------------------------------------------
+  logout(token: Token): Observable<any> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token.token}`,
+      }),
+    };
+    return this.http
+      .post<User>(this.apiURL + 'logout', this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición POST para iniciar sesión------------------------------------------------------------
+  login(credentials: Credentials): Observable<Token> {
+    return this.http
+      .post<Token>(this.apiURL + 'login', credentials, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición POST para Registrar usuario------------------------------------------------------------
+  Register(credentials: RegisterCredentials): Observable<Token> {
+    return this.http
+      .post<Token>(this.apiURL + 'register', credentials, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  //Manipulador de errores-----------------------------------------------------------------------
+  errorHandler(error: any) {
+    let errorMessage = { status: null, message: null };
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      errorMessage = { status: error.status, message: error.message };
+    }
+    return throwError(errorMessage);
+  }
+}
