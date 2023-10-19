@@ -13,13 +13,13 @@ export interface Token {
 }
 
 export interface User {
-  id:                number;
-  name:              string;
-  email:             string;
+  id:                number|null;
+  name:              string|null;
+  email:             string|null;
   email_verified_at: null;
-  profile:           number;
-  created_at:        Date;
-  updated_at:        Date;
+  profile:           number|null;
+  created_at:        Date|null;
+  updated_at:        Date|null;
 }
 
 export interface status {

@@ -33,37 +33,36 @@ export class AuthService {
   }
 
   //Petición GET para obtener el usuario que está con la sesión activa---------------------------
-  getUser(token: Token): Observable<Token> {
-    console.log("funcion",token)
+  getUser(): Observable<User> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token.token}`,
+        Authorization: `Bearer ${this.getToken()}`,
       }),
     };
     return this.http
-      .post<Token>(this.apiURL + 'get-user', token, this.httpOptions)
-      .pipe(catchError(this.errorHandler));
+      .post<User>(this.apiURL + 'get-user', {token:this.getToken()}, this.httpOptions)
+      .pipe(map((resp:any) => resp.user),catchError(this.errorHandler));
   }
 //Petición GET para verificar el token-------------------------------------------------------------
-validateToken(token: Token): Observable<boolean> {
+validateToken(): Observable<boolean> {
 
   this.httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token.token}`,
+      Authorization: `Bearer ${this.getToken()}`,
     }),
   };
   return this.http
-    .post(this.apiURL + 'validatetoken', token, this.httpOptions)
+    .post(this.apiURL + 'validatetoken',  {token:this.getToken()}, this.httpOptions)
     .pipe(map((resp:any) => resp.status !== 'ok'),catchError(this.errorHandler));
 }
   //Peición POST logout--------------------------------------------------------------------------
-  logout(token: Token): Observable<any> {
+  logout(): Observable<any> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token.token}`,
+        Authorization: `Bearer ${this.getToken()}`,
       }),
     };
     return this.http

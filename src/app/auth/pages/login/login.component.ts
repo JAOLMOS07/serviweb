@@ -33,13 +33,7 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  verificar(): void{
-    console.log(this.authService.getToken());
-    this.authService.validateToken({token: this.authService.getToken()}).subscribe((res) => {
-      // El inicio de sesión fue exitoso, manejamos la respuesta
-     console.log(res)
-    });
-  }
+
   submit(): void {
     this.credentials = {
       email: this.form.value.email,
@@ -49,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.credentials).subscribe((res: Token) => {
       // El inicio de sesión fue exitoso, manejamos la respuesta
       this.authService.setToken(res);
-      this.router.navigateByUrl('user/client');
+      this.router.navigateByUrl('/client');
     });
   }
 }
