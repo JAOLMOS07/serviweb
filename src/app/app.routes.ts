@@ -30,6 +30,22 @@ export const routes: Routes = [
       import('./service/pages/client/client.component').then(
         (comp) => comp.ClientComponent
       ),
+  },{
+    path: 'worker',
+    providers: [AuthService,ServiceService],
+    canMatch: [loggedInGuard],
+    loadComponent: () =>
+      import('./service/pages/worker/worker.component').then(
+        (comp) => comp.WorkerComponent
+      ),
+  },  {
+    path: 'client/solicitar',
+    providers: [AuthService,ServiceService],
+    canMatch: [loggedInGuard],
+    loadComponent: () =>
+      import('./service/pages/create-service/create-service.component').then(
+        (comp) => comp.CreateServiceComponent
+      ),
   },
   {
     path: '**',

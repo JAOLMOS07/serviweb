@@ -1,4 +1,3 @@
-
 <app-profile [User]="user" />
 <div class="container-fluid">
   <!-- minimo 730px de ancho -->
@@ -10,17 +9,15 @@
       <div class="col-6 pt-4 justify-content-center align-items-center">
         <div class="text-center">
           <p>
-            ¿Necesitas un servicio? pidelo fácil, completamente a tu gusto, que
-            se adapte a tus necesidades y sin complicaciones.
+            Aqí tienes los servicios disponibles actualmente para poder trabajar
+            en cualquier momento, puedes postularte y aprovechar al máximo cada
+            oportunidad.
           </p>
-        </div>
-        <div class="">
-          <button routerLink="solicitar"   class="btn btn-primary">Solicitar servicio</button>
         </div>
       </div>
       <div class="col-6 justify-content-center align-items-center">
         <img
-          src="../../../../assets/supervision.png"
+          src="../../../../assets/oficina.png"
           alt="img"
           style="width: 180px; border-radius: 10px"
         />
@@ -28,7 +25,7 @@
       <hr class="m-2" />
       <ul class="list-group">
         <li *ngFor="let service of services">
-          <app-item-service [service]="service" [context]="'Seguimiento'"></app-item-service>
+          <app-item-service [service]="service" [context]="'Postularse'" (ServiceEvent)="SelectService($event)"></app-item-service>
         </li>
         <div class="container-fluid">
           <div class="row d flex justify-content-center align-items-center">
@@ -36,8 +33,8 @@
               class="row col-6 bg-white shadow-sm py-3 px-4 m-1 text-center"
               style="border-radius: 15px"
             >
-          <button class="btn btn-primary">Ver todos los servicios</button>
-          </div>
+              <button class="btn btn-primary">Ver todos los servicios</button>
+            </div>
           </div>
         </div>
       </ul>

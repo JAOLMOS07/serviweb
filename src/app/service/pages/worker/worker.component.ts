@@ -6,15 +6,15 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { ServiceService } from '../../services/service.service';
 import { Service } from '../../service';
 import { ServiceItemComponent } from '../../components/service-item/service-item.component';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
-  selector: 'app-client',
+  selector: 'app-worker',
   standalone: true,
-  imports: [CommonModule, ProfileComponent,ServiceItemComponent, RouterModule],
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss'],
+  imports: [CommonModule, ProfileComponent,ServiceItemComponent],
+  templateUrl: './worker.component.html',
+  styleUrls: ['./worker.component.scss']
 })
-export class ClientComponent implements OnInit {
+export class WorkerComponent implements OnInit {
   user!: User;
   services!: Service[];
   router = inject(Router);
@@ -33,7 +33,7 @@ export class ClientComponent implements OnInit {
         console.error('ERROR obteniendo el usuario ', error.message);
       }
     );
-    this.serviceService.getServices().subscribe(
+    this.serviceService.getServicesOffers().subscribe(
       (res: Service[]) => {
         this.services = res;
         console.log(this.services);
@@ -43,5 +43,16 @@ export class ClientComponent implements OnInit {
         console.error('ERROR en los servicios ', error.message);
       }
     );
+  }
+
+  SelectService(service:Service):void{
+    this.serviceService.postulateService(service).subscribe((res: any)=>{
+      this.router.navigateByUrl('worker');
+    },
+      (error: any) => {
+        //Algun error al postularse
+        console.error('ERROR al postularse ', error.message);
+
+      })
   }
 }

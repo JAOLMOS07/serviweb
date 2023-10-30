@@ -10,3 +10,14 @@ export interface Service {
   created_at:   Date;
   updated_at:   Date;
 }
+
+export interface CreateService {
+  name:        string;
+  description: string;
+  price_min:   number;
+  price_max:   number;
+  date:        Date;
+  category:    number[];
+}
+
+

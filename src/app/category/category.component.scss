@@ -1,0 +1,17 @@
+.option{
+  padding: 5px;
+  margin: 5px;
+  display: inline-block;
+  background-color: rgb(231, 166, 166);
+
+  color: white;
+  cursor: pointer;
+  border-radius: 15px;
+  border: none;
+  display: inline-block;
+}
+.option_selected{
+  background-color: rgb(241, 65, 65);
+
+
+}

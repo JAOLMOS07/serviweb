@@ -19,7 +19,6 @@
               value=""
               required
               autocomplete="name"
-
             />
             <label for="name">Nombre</label>
             <div
@@ -42,7 +41,6 @@
               value=""
               required
               autocomplete="new-password"
-
             />
             <label for="email">Email</label>
             <div
@@ -59,7 +57,27 @@
           </div>
           <div class="form-floating m-3">
             <input
-            [(ngModel)]="pass"
+              type="number"
+              class="form-control"
+              id="phone"
+              formControlName="phone"
+              placeholder="Phone"
+              name="phone"
+              value=""
+              required
+            />
+            <label for="phone">Celular</label>
+            <div
+              *ngIf="f['password'].touched && f['password'].invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f['password'].errors?.['required']">
+                *Debe proporcionar una contraseña.
+              </div>
+            </div>
+          </div>
+          <div class="form-floating m-3">
+            <input
               type="password"
               class="form-control"
               id="password"
@@ -69,7 +87,6 @@
               value=""
               required
               autocomplete="new-password"
-
             />
             <label for="password">Contraseña</label>
             <div
@@ -83,7 +100,6 @@
           </div>
           <div class="form-floating m-3">
             <input
-            [(ngModel)]="passR"
               type="password"
               class="form-control"
               id="passwordR"
@@ -93,20 +109,34 @@
               value=""
               required
               autocomplete="new-password"
-
             />
             <label for="passwordR">Confirmar contraseña</label>
             <div
-              *ngIf="f['passwordR'].touched && f['passwordR'].invalid  "
+              *ngIf="f['passwordR'].touched && f['passwordR'].invalid"
               class="alert alert-danger"
             >
               <div *ngIf="f['passwordR'].errors?.['required']">
                 *Debe proporcionar una contraseña.
               </div>
-
             </div>
             <div *ngIf="validatePassword()" class="alert alert-danger">
               *Deben coincidir las contraseñas.
+            </div>
+          </div>
+          <div class="m-3">
+            <input
+              type="checkbox"
+              class="form-check-input m-1"
+              id="worker"
+              (click)="changeWorker()"
+              name="workerCheck"
+            />
+            <label for="workerCheck"> Trabajador</label>
+            <div *ngIf="workerSelected" class="alert alert-primary">
+              Debe seleccionar al menos una categoría.
+              <app-category
+                (CategoryEvent)="CategorySelected($event)"
+              ></app-category>
             </div>
           </div>
           <div class="row m-3">
@@ -114,16 +144,16 @@
               <button
                 class="btn btn-primary col-6"
                 type="submit"
-                [disabled]="!form.valid"
+                [disabled]="
+                  (!form.valid )
+                "
               >
                 Registrar
               </button>
             </div>
           </div>
           <div class="row m-3">
-            <a
-              class="text-center"
-              routerLink="/login"
+            <a class="text-center" routerLink="/login"
               >Inicia Sesión con tu cuenta.</a
             >
           </div>

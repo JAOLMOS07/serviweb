@@ -2,6 +2,9 @@ export interface RegisterCredentials {
   name: string;
   email: string;
   password: string;
+  phone: string|null;
+  role_id:number
+  categories: number[]|null
 }
 export interface Credentials {
   email: string;

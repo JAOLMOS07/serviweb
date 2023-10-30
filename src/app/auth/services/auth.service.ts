@@ -81,6 +81,33 @@ validateToken(): Observable<boolean> {
       .post<Token>(this.apiURL + 'register', credentials, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
+  //Petición POST para crear cliente------------------------------------------------------------
+
+  CreateClient(): Observable<any> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      }),
+    };
+    return this.http
+      .post<any>(this.apiURL + 'client/createclient', this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  //Petición POST para crear trabajador------------------------------------------------------------
+
+  CreateWorker(credentials: RegisterCredentials): Observable<any> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      }),
+    };
+    return this.http
+      .post<any>(this.apiURL + 'worker/createworker',credentials.categories, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
 
   //Manipulador de errores-----------------------------------------------------------------------
   errorHandler(error: any) {

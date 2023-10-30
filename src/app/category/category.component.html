@@ -1,0 +1,14 @@
+<div *ngIf="categories">
+  <input
+    (click)="addCategory(category)"
+    type="button"
+    [ngClass]="{
+      option: true,
+      option_selected: this.categoriesSelected.includes(category)
+    }"
+    *ngFor="let category of categories"
+    value = "{{ category.name }}"
+  >
+
+
+</div>

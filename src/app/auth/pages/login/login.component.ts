@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormGroup,
@@ -22,7 +22,9 @@ import {AuthService} from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   credentials!: Credentials;
-  constructor(private authService: AuthService,private router: Router) {}
+  authService = inject(AuthService);
+  router = inject(Router);
+
   ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
