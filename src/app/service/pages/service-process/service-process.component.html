@@ -1,0 +1,38 @@
+<app-profile *ngIf="user" [User]="user" />
+<div *ngIf="service" class="container-fluid">
+  <!-- minimo 730px de ancho -->
+  <div class="row d flex justify-content-center align-items-center">
+
+    <div
+      class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
+      style="border-radius: 15px"
+    >
+    <app-item-service [service]="service" [context]="'Postularse'"></app-item-service>
+      <div class="col-12 pt-4 justify-content-center align-items-center">
+        <div class="text-center">
+          <p>
+            ¿Deseas aplicar a este servicio? Es tan facil como revisar el
+            presupuesto del cliente y ofrecer un cobro atráctivo para tener
+            mayor posibilidad de ser aceptado.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 justify-content-center align-items-center">
+        <p>presupuesto del cliente: {{service.price_min| currency: 'USD'}} - {{service.price_max| currency: 'USD'}} </p>
+      </div>
+      <form class="j" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-group d-flex m-auto col-6">
+          <input
+            type="number"
+            class="form-control m-1"
+            placeholder="Ingresar propuesta"
+            formControlName="price"
+          />
+          <button class="btn btn-primary m-1" type="submit" [disabled]="!form.valid">
+            Postularse
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -46,13 +46,15 @@ export class WorkerComponent implements OnInit {
   }
 
   SelectService(service:Service):void{
-    this.serviceService.postulateService(service).subscribe((res: any)=>{
-      this.router.navigateByUrl('worker');
+    this.router.navigateByUrl('/worker/postularse/'+service.id);
+    console.log(this.services.indexOf(service))
+    /* this.serviceService.postulateService(service).subscribe((res: any)=>{
+
     },
       (error: any) => {
         //Algun error al postularse
         console.error('ERROR al postularse ', error.message);
 
-      })
+      }) */
   }
 }

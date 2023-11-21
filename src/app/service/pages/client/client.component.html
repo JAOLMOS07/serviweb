@@ -1,5 +1,5 @@
 
-<app-profile [User]="user" />
+<app-profile [User]="user" [context]="1" />
 <div class="container-fluid">
   <!-- minimo 730px de ancho -->
   <div class="row d flex justify-content-center align-items-center">
@@ -10,12 +10,12 @@
       <div class="col-6 pt-4 justify-content-center align-items-center">
         <div class="text-center">
           <p>
-            ¿Necesitas un servicio? pidelo fácil, completamente a tu gusto, que
+            ¿Necesitas un servicio? pídelo fácil, completamente a tu gusto, que
             se adapte a tus necesidades y sin complicaciones.
           </p>
         </div>
         <div class="">
-          <button routerLink="solicitar"   class="btn btn-primary">Solicitar servicio</button>
+          <button routerLink="solicitar"  [ngClass]="" class="btn btn-primary">Solicitar servicio</button>
         </div>
       </div>
       <div class="col-6 justify-content-center align-items-center">
@@ -28,7 +28,7 @@
       <hr class="m-2" />
       <ul class="list-group">
         <li *ngFor="let service of services">
-          <app-item-service [service]="service" [context]="'Seguimiento'"></app-item-service>
+          <app-item-service [service]="service"  (ServiceEvent)="SelectService($event)" [context]="1"></app-item-service>
         </li>
         <div class="container-fluid">
           <div class="row d flex justify-content-center align-items-center">

@@ -6,7 +6,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Credentials, Token, User } from '../../user';
+import { Credentials, Token } from '../../user';
 import { Router, RouterModule} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
+    console.log(this.authService.getToken().length);
   }
 
   get f() {

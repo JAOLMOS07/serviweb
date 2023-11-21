@@ -1,35 +1,33 @@
-<app-profile [User]="user" [context]="2" />
-<div class="container-fluid">
+<div *ngIf="service" class="container-fluid">
   <!-- minimo 730px de ancho -->
+
   <div class="row d flex justify-content-center align-items-center">
     <div
       class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
       style="border-radius: 15px"
     >
+    <app-item-service [service]="service" [context]="1"></app-item-service>
       <div class="col-6 pt-4 justify-content-center align-items-center">
         <div class="text-center">
           <p>
-            Aqí tienes los servicios disponibles actualmente para poder trabajar
-            en cualquier momento, puedes postularte y aprovechar al máximo cada
-            oportunidad.
+            En esta sección podras ver a todos los aplicantes actuales a tu
+            servici, podrás aceptarlos según tu conveniencia de precio y
+            próximamente por las calificaciones obtenidas en servicios
+            anteriores.
           </p>
         </div>
       </div>
       <div class="col-6 justify-content-center align-items-center">
         <img
-          src="../../../../assets/oficina.png"
+          src="../../../../assets/supervision2.png"
           alt="img"
           style="width: 180px; border-radius: 10px"
         />
       </div>
       <hr class="m-2" />
-      <ul class="list-group">
-        <li *ngFor="let service of services">
-          <app-item-service
-            [service]="service"
-            [context]="2"
-            (ServiceEvent)="SelectService($event)"
-          ></app-item-service>
+      <ul *ngIf="applicants" class="list-group">
+        <li *ngFor="let applicant of applicants">
+          <app-worker-item [applicant]="applicant" [context]="1" (applicantEvent)="SelectApplicant($event)"></app-worker-item>
         </li>
         <div class="container-fluid">
           <div class="row d flex justify-content-center align-items-center">
@@ -37,9 +35,7 @@
               class="row col-6 bg-white shadow-sm py-3 px-4 m-1 text-center"
               style="border-radius: 15px"
             >
-              <button class="btn btn-primary-worker">
-                Ver todos los servicios
-              </button>
+              <button class="btn btn-primary">Cancelar servicio</button>
             </div>
           </div>
         </div>

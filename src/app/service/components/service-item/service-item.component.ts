@@ -1,4 +1,4 @@
-import { Component, Input,EventEmitter, Output } from '@angular/core';
+import { Component, Input,EventEmitter, Output,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Service } from '../../service';
 
@@ -9,11 +9,14 @@ import { Service } from '../../service';
   templateUrl: './service-item.component.html',
   styleUrls: ['./service-item.component.scss']
 })
-export class ServiceItemComponent {
+export class ServiceItemComponent implements OnInit {
   @Input() service! : Service;
-  @Input() context! : String;
+  @Input() context! : number;
+  title:string="";
   @Output() ServiceEvent = new EventEmitter<Service>();
-
+  ngOnInit(): void {
+    this.title=this.context ===1?'Seguimiento':'Postularse';
+  }
 
   SelectService(service:Service):void{
     this.ServiceEvent.emit(service)

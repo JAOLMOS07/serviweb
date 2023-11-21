@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Service,CreateService } from '../service';
+import { Service, CreateService, Postulante, Voucher, Rate } from '../service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Applicant, User } from 'src/app/auth/user';
 @Injectable()
 export class ServiceService {
   //dirección http base de mi API
@@ -18,6 +19,33 @@ export class ServiceService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  //Petición GET para obtener un servicio especifico---------------------------
+  getService(serviceId: string): Observable<Service> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<Service>(this.apiURL + 'getservice/' + serviceId, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición GET para obtener un servicio especifico---------------------------
+  getApplicants(serviceId: string): Observable<Applicant[]> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<Applicant[]>(
+        this.apiURL + 'aplicants/' + serviceId,
+        this.httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
   //Petición GET para obtener la lista de servicios del cliente actual---------------------------
   getServices(): Observable<Service[]> {
     this.httpOptions = {
@@ -30,8 +58,44 @@ export class ServiceService {
       .get<Service[]>(this.apiURL + 'getservicesclient', this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
-   //Petición GET para obtener la lista de servicios al que el trabajador puede postularse---------------------------
-   getServicesOffers(): Observable<Service[]> {
+  //Petición GET para obtener el voucher de pago del servicio---------------------------
+  getVoucher(serviceId: string): Observable<Voucher> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<Voucher>(this.apiURL + 'getvoucher/'+serviceId, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición GET para obtener el voucher de pago del servicio---------------------------
+  getRate(serviceId: string): Observable<Rate> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<Rate>(this.apiURL + 'getrate/'+serviceId, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición GET para obtener el voucher de pago del servicio---------------------------
+  getUserInService(serviceId: string): Observable<User> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<User>(this.apiURL + 'getuserinservice/'+serviceId, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición GET para obtener la lista de servicios al que el trabajador puede postularse---------------------------
+  getServicesOffers(): Observable<Service[]> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -43,7 +107,7 @@ export class ServiceService {
       .pipe(catchError(this.errorHandler));
   }
   //Petición POST para crear un servicio---------------------------
-  createService(service:CreateService): Observable<Service> {
+  createService(service: CreateService): Observable<Service> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -51,11 +115,33 @@ export class ServiceService {
       }),
     };
     return this.http
-      .post<Service>(this.apiURL + 'createservice',service, this.httpOptions)
+      .post<Service>(this.apiURL + 'createservice', service, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición POST para crear un servicio---------------------------
+  acceptApplicants(
+    service: Service,
+    applicant: Applicant
+  ): Observable<Service> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .post<Service>(
+        this.apiURL + 'acceptaplicants/' + service.id,
+        { worker_id: applicant.id },
+        this.httpOptions
+      )
       .pipe(catchError(this.errorHandler));
   }
   //Petición POST para que un trabajador se postule a un servicio---------------------------
-  postulateService(service:Service): Observable<any> {
+  postulateService(
+    service: Service,
+    postulate: Postulante
+  ): Observable<Service> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -63,7 +149,11 @@ export class ServiceService {
       }),
     };
     return this.http
-      .post<any>(this.apiURL + 'postulate/'+service.id,service, this.httpOptions)
+      .post<Service>(
+        this.apiURL + 'postulate/' + service.id,
+        postulate,
+        this.httpOptions
+      )
       .pipe(catchError(this.errorHandler));
   }
   //Manipulador de errores-----------------------------------------------------------------------

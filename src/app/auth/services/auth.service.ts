@@ -31,6 +31,18 @@ export class AuthService {
   deleteToken(): void {
     localStorage.removeItem('token');
   }
+  //Petición POST para cerrar sesión---------------------------
+  logOut(): Observable<any> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      }),
+    };
+    return this.http
+      .post<any>(this.apiURL + 'logout', this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
 
   //Petición GET para obtener el usuario que está con la sesión activa---------------------------
   getUser(): Observable<User> {

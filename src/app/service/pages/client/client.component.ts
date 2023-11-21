@@ -29,7 +29,7 @@ export class ClientComponent implements OnInit {
         this.user = res;
       },
       (error: any) => {
-        //Algun error al obtener el usuario
+        //Algún error al obtener el usuario
         console.error('ERROR obteniendo el usuario ', error.message);
       }
     );
@@ -39,9 +39,15 @@ export class ClientComponent implements OnInit {
         console.log(this.services);
       },
       (error: any) => {
-        //Algun error al obtener los servicios
+        //Algún error al obtener los servicios
         console.error('ERROR en los servicios ', error.message);
       }
     );
+  }
+
+  SelectService(service:Service):void{
+    this.router.navigateByUrl('/client/applicants/'+service.id);
+    console.log(this.services.indexOf(service))
+
   }
 }

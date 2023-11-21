@@ -1,0 +1,18 @@
+$primary-m : rgba(235, 135, 135);
+$primary-m-worker : rgb(42, 65, 194);
+$color-worker: white;
+$color-client: black;
+
+
+.bg-worker{
+  background-color: $primary-m-worker;
+}
+.bg-client{
+  background-color: $primary-m;
+}
+.c-worker{
+  color: $color-worker;
+}
+.c-client{
+  color: $color-client;
+}
