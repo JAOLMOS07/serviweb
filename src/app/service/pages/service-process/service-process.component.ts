@@ -28,16 +28,20 @@ export class ServiceProcessComponent implements OnInit {
   service!: Service;
   user!: User;
   rate!: Rate;
+  context:number=3;
   router = inject(Router);
   private route = inject(ActivatedRoute);
   private serviceService = inject(ServiceService);
   form!: FormGroup;
+
   ngOnInit(): void {
+
     this.route.params.subscribe((params) =>
-      this.serviceService.getService(params['serviceId']).subscribe(
-        (res: Service) => {
+      this.serviceService.getUserContact(params['serviceId']).subscribe(
+        (res: User) => {
           // El servicio es correcto y puede er renderizado
-          this.service = res;
+          this.user = res;
+
         },
         (error: any) => {
           //Algun error al obtener el servicio
@@ -46,10 +50,11 @@ export class ServiceProcessComponent implements OnInit {
       )
     );
     this.route.params.subscribe((params) =>
-      this.serviceService.getUserInService(params['serviceId']).subscribe(
-        (res: User) => {
+      this.serviceService.getService(params['serviceId']).subscribe(
+        (res: Service) => {
           // El servicio es correcto y el usuario puede ser renderizado
-          this.user = res;
+          this.service = res;
+
         },
         (error: any) => {
           //Algun error al obtener el servicio
@@ -62,6 +67,7 @@ export class ServiceProcessComponent implements OnInit {
         (res: Rate) => {
           // El servicio es correcto y el usuario puede ser renderizado
           this.rate = res;
+          console.log(this.rate)
         },
         (error: any) => {
           //Algun error al obtener el servicio
@@ -79,5 +85,7 @@ export class ServiceProcessComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  submit(): void {}
+  submit(): void {
+
+  }
 }

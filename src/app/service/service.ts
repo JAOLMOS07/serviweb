@@ -8,6 +8,8 @@ export interface Service {
   client_id:    number;
   calification: number;
   status:       number;
+  confirmed:boolean;
+
   created_at:   Date;
   updated_at:   Date;
 }

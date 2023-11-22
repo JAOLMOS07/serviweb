@@ -1,10 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from '../../components/profile/profile.component';
-import { User, Applicant } from 'src/app/auth/user';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { Applicant } from 'src/app/auth/user';
 import { ServiceService } from '../../services/service.service';
-import { Service } from '../../service';
+import { Service, Voucher } from '../../service';
 import { workerItemComponent } from '../../components/worker-item/worker-item.component';
 import { ServiceItemComponent } from '../../components/service-item/service-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -51,8 +49,9 @@ export class ViewApplicantsComponent implements OnInit {
 
   SelectApplicant(applicant: Applicant): void {
     this.serviceService.acceptApplicants(this.service, applicant).subscribe(
-      (res:Service) => {
-        this.router.navigateByUrl('/client');
+      (res:Voucher) => {
+
+        this.router.navigateByUrl('/client/voucher/'+res.id);
       },
       (error:any) => {
         console.error('ERROR al acceptar el aplicante ', error.message);

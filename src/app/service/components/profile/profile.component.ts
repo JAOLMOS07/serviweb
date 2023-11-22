@@ -15,6 +15,16 @@ title:string='';
 /* @Output() profileEvent = new EventEmitter<any>(); */
 
 ngOnInit(): void {
-this.title = this.context === 1?'Cliente':'Trabajador';
+  if(this.context === 1){
+    this.title = '-Cliente';
+
+  }else if(this.context === 2){
+    this.title ='- Trabajador';
+  }else if(this.context === 3){
+    this.title ='- Contacto';
+
+
+}
+
 }
 }

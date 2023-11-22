@@ -32,6 +32,7 @@ export class VoucherInfoComponent implements OnInit {
         (res: Voucher) => {
           // El servicio es correcto y el voucher puede ser renderizado
           this.voucher = res;
+          console.log(res)
         },
         (error: any) => {
           //Algun error al obtener el servicio
@@ -52,13 +53,8 @@ export class VoucherInfoComponent implements OnInit {
       )
     );
     this.form = new FormGroup({
-      id: new FormControl('', [Validators.required]),
-      transaction_number: new FormControl('',[Validators.required]),
-      price: new FormControl('', [Validators.required]),
-      confirmed: new FormControl('', [Validators.requiredTrue]),
-      banck_id: new FormControl('', [Validators.required]),
-      service_id: new FormControl('', [Validators.required]),
 
+      transaction_number: new FormControl('',[Validators.required]),
 
     });
   }
@@ -66,5 +62,17 @@ export class VoucherInfoComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  submit(): void {}
+  submit(): void {
+    this.voucher.transaction_number = this.form.value.transaction_number;
+    this.serviceService.toVerifyVoucher(this.voucher).subscribe(
+      (res: Voucher) => {
+        // El servicio es correcto y puede er renderizado
+        this.voucher = res;
+      },
+      (error: any) => {
+        //Algun error al obtener el servicio
+        console.error('ERROR obteniendo el servicio ', error.message);
+      }
+    )
+  }
 }

@@ -47,7 +47,6 @@ export class WorkerComponent implements OnInit {
 
   SelectService(service:Service):void{
     this.router.navigateByUrl('/worker/postularse/'+service.id);
-    console.log(this.services.indexOf(service))
     /* this.serviceService.postulateService(service).subscribe((res: any)=>{
 
     },

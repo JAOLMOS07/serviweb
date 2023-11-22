@@ -20,7 +20,7 @@ export class ClientComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   serviceService = inject(ServiceService);
-  constructor() {}
+
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(

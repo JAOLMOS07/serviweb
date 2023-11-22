@@ -63,6 +63,30 @@ export const routes: Routes = [
        import('./service/pages/view-applicants/view-applicants.component').then(
          (comp) => comp.ViewApplicantsComponent
        ),
+   },{
+    path: 'client/voucher/:serviceId',
+     providers: [AuthService,ServiceService],
+     /* canMatch: [loggedInGuard], */
+     loadComponent: () =>
+       import('./service/pages/voucher-info/voucher-info.component').then(
+         (comp) => comp.VoucherInfoComponent
+       ),
+   },{
+    path: 'client/proceso/:serviceId',
+     providers: [AuthService,ServiceService],
+     /* canMatch: [loggedInGuard], */
+     loadComponent: () =>
+       import('./service/pages/service-process/service-process.component').then(
+         (comp) => comp.ServiceProcessComponent
+       ),
+   },{
+    path: 'client/services',
+     providers: [AuthService,ServiceService],
+     /* canMatch: [loggedInGuard], */
+     loadComponent: () =>
+       import('./service/pages/services/services.component').then(
+         (comp) => comp.ServicesComponent
+       ),
    },
   {
     path: '**',

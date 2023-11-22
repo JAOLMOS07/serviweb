@@ -31,6 +31,18 @@ export class ServiceService {
       .get<Service>(this.apiURL + 'getservice/' + serviceId, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
+    //Petición GET para obtener un servicio especifico---------------------------
+    getUserContact(serviceId: string): Observable<User> {
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.authService.getToken()}`,
+        }),
+      };
+      return this.http
+        .get<User>(this.apiURL + 'getuserservice/' + serviceId, this.httpOptions)
+        .pipe(catchError(this.errorHandler));
+    }
   //Petición GET para obtener un servicio especifico---------------------------
   getApplicants(serviceId: string): Observable<Applicant[]> {
     this.httpOptions = {
@@ -58,6 +70,31 @@ export class ServiceService {
       .get<Service[]>(this.apiURL + 'getservicesclient', this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
+  //Petición GET para obtener la lista de servicios del cliente actual---------------------------
+  getAllServices(): Observable<Service[]> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<Service[]>(this.apiURL + 'getallservicesclient', this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición POST para enviar a verificar el voucher---------------------------
+
+  toVerifyVoucher(voucher: Voucher): Observable<Voucher> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .post<Voucher>(this.apiURL + 'toverifyvoucher/'+voucher.id,voucher, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
   //Petición GET para obtener el voucher de pago del servicio---------------------------
   getVoucher(serviceId: string): Observable<Voucher> {
     this.httpOptions = {
@@ -80,18 +117,6 @@ export class ServiceService {
     };
     return this.http
       .get<Rate>(this.apiURL + 'getrate/'+serviceId, this.httpOptions)
-      .pipe(catchError(this.errorHandler));
-  }
-  //Petición GET para obtener el voucher de pago del servicio---------------------------
-  getUserInService(serviceId: string): Observable<User> {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.authService.getToken()}`,
-      }),
-    };
-    return this.http
-      .get<User>(this.apiURL + 'getuserinservice/'+serviceId, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
   //Petición GET para obtener la lista de servicios al que el trabajador puede postularse---------------------------
@@ -122,7 +147,7 @@ export class ServiceService {
   acceptApplicants(
     service: Service,
     applicant: Applicant
-  ): Observable<Service> {
+  ): Observable<Voucher> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -130,7 +155,7 @@ export class ServiceService {
       }),
     };
     return this.http
-      .post<Service>(
+      .post<Voucher>(
         this.apiURL + 'acceptaplicants/' + service.id,
         { worker_id: applicant.id },
         this.httpOptions

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <!-- minimo 730px de ancho -->
+  <div class="row d flex justify-content-center align-items-center">
+    <div
+      class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
+      style="border-radius: 15px"
+    >
+      <div class="col-6 pt-4 justify-content-center align-items-center">
+        <div class="text-center">
+          <p>
+            Este es el panel de servicios, aquí puedes ver todos los servicios
+            que están en proceso o ya fueron finalizados
+          </p>
+        </div>
+      </div>
+      <div class="col-6 justify-content-center align-items-center">
+        <img
+          src="../../../../assets/supervision.png"
+          alt="img"
+          style="width: 180px; border-radius: 10px"
+        />
+      </div>
+      <hr class="m-2" />
+      <ul class="list-group">
+        <li *ngFor="let service of services">
+          <app-item-service
+            [service]="service"
+            [context]="5"
+            (ServiceEventV)="SelectServiceVoucher($event)"
+            (ServiceEventP)="SelectServiceProceso($event)"
+            (ServiceEventR)="SelectServiceReport($event)"
+          ></app-item-service>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
