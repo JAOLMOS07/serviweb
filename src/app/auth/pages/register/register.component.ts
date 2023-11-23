@@ -20,7 +20,7 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   form!: FormGroup;
   pass: string = '';
   passR: string = '';

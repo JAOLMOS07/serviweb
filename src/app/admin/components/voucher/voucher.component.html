@@ -1,0 +1,75 @@
+<div class="container-fluid"> <!-- minimo 730px de ancho -->
+  <div class="row d flex justify-content-center align-items-center">
+    <div
+      class="card col-sm-10 col-lg-8 col-sm-8 bg-white shadow py-3 px-4 m-3"
+      style="border-radius: 15px"
+    >
+      <div class="card-body p-4">
+        <div class="d-flex text-black  align-items-center">
+          <div class="flex-shrink-0">
+            <img
+              src="../../../../assets/avatar.svg"
+              class="img-fluid"
+              style="width: 100px; border-radius: 10px"
+            />
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <div
+          class="form-group d-flex justify-content-center align-items-center"
+        >
+          <div class="col-12">
+
+            <br />
+            <label for="price" class="form-label"
+              >Precio:{{ this.voucher.price | currency : "USD" }}</label
+            >
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">ID</span>
+              <input
+                type="text"
+                class="form-control"
+                disabled
+                value="{{ this.voucher.id }}"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Banco</span>
+              <input
+                type="text"
+                class="form-control"
+                disabled
+                value="Nequi - 3137931748"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Transacción</span>
+              <input
+                type="text"
+                class="form-control"
+                disabled
+                value="{{
+                  this.voucher.transaction_number
+                }}"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+            <div  class="d-flex pt-1">
+              <button
+
+              (click)="SelectVoucher(voucher)"
+                type="button"
+                class="btn btn-outline-primary-worker me-1 flex-grow-1"
+              >
+                Verificar
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

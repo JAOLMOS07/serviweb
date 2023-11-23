@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <!-- minimo 730px de ancho -->
+  <div class="row d flex justify-content-center align-items-center">
+    <div
+      class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
+      style="border-radius: 15px"
+    >
+      <hr class="m-2" />
+      <ul class="list-group">
+        <li *ngFor="let voucher of vouchers">
+          <app-voucher
+            [voucher]="voucher"
+
+            (voucherEvent)="SelectVoucher($event)"
+          ></app-voucher>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

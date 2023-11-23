@@ -1,39 +1,46 @@
-
 <app-profile *ngIf="user && service" [User]="user" [context]="3" />
 <div *ngIf="service" class="container-fluid">
   <!-- minimo 730px de ancho -->
   <div class="row d flex justify-content-center align-items-center">
-
     <div
       class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
       style="border-radius: 15px"
     >
-    <app-item-service [service]="service" [context]="4"></app-item-service>
+      <app-item-service [service]="service" [context]="4"></app-item-service>
       <div class="col-12 pt-4 justify-content-center align-items-center">
         <div class="text-center">
           <p>
-            En este apartado debe calificar el servicio, una vez calificado puede finalizarlo.
+            En este apartado debe calificar el servicio, una vez calificado
+            puede finalizarlo.
           </p>
         </div>
       </div>
-      <form class="j" [formGroup]="form" (ngSubmit)="submit()">
-        <div class="form-group m-auto col-8 ">
+      <form
+        *ngIf="
+          this.service.status === 3 &&
+          (this.rate.rate_client === 0 || this.rate.rate_worker === 0)
+        "
+        class="j"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+      >
+        <div class="form-group m-auto col-8">
           <div class="d-flex align-items-center justify-content-center">
             <label for="rate">Calificación: </label>
             <input
               id="rate"
               type="number"
-              class="form-control m-1 "
+              class="form-control m-1"
               placeholder="ej. 8"
               formControlName="rate"
-              style="max-width: 100px;"
+              style="max-width: 100px"
               maxlength="10"
             />
           </div>
 
-
           <div class="form-floating m-3">
-            <textarea style="min-height: 200px; max-height: 400px;"
+            <textarea
+              style="min-height: 200px; max-height: 400px"
               id="comment"
               class="md-textarea form-control"
               formControlName="comment"
@@ -41,15 +48,52 @@
               cols="30"
             ></textarea>
             <label for="comment">Comentario:</label>
-
           </div>
 
-         <br>
-          <button class="btn btn-primary m-1" type="submit" [disabled]="!form.valid">
+          <br />
+          <button
+            class="btn btn-primary m-1"
+            type="submit"
+            [disabled]="!form.valid"
+          >
             Finalizar
           </button>
         </div>
       </form>
+      <div *ngIf="this.rate.rate_worker > 0" class="container-fluid">
+        <div class="row d flex justify-content-center align-items-center">
+          <div
+            class="row col-8 bg-white shadow py-3 px-4 m-1 text-center"
+            style="border-radius: 15px"
+          >
+            <p>
+              Calificación del trabajador:
+              <strong>{{ this.rate.rate_worker }}</strong
+              >/10
+            </p>
+            <br />
+            <p>Comentario del trabajador:</p>
+            <p>{{ this.rate.comment_worker }}</p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="this.rate.rate_client > 0" class="container-fluid">
+        <div class="row d flex justify-content-center align-items-center">
+          <div
+            class="row col-8 bg-white shadow py-3 px-4 m-1 text-center"
+            style="border-radius: 15px"
+          >
+            <p>
+              Calificación del cliente:
+              <strong>{{ this.rate.rate_client }}</strong
+              >/10
+            </p>
+            <br />
+            <p>Comentario del cliente:</p>
+            <p>{{ this.rate.comment_client }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

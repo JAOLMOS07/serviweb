@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Service, CreateService, Postulante, Voucher, Rate } from '../service';
+import { Service, CreateService, Postulante, Voucher, Rate, createRate } from '../service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Applicant, User } from 'src/app/auth/user';
 @Injectable()
@@ -71,6 +71,18 @@ export class ServiceService {
       .pipe(catchError(this.errorHandler));
   }
   //Petición GET para obtener la lista de servicios del cliente actual---------------------------
+  getAllServicesWorker(): Observable<Service[]> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<Service[]>(this.apiURL + 'getallservicesworker', this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición GET para obtener la lista de servicios del cliente actual---------------------------
   getAllServices(): Observable<Service[]> {
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -93,6 +105,19 @@ export class ServiceService {
     };
     return this.http
       .post<Voucher>(this.apiURL + 'toverifyvoucher/'+voucher.id,voucher, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición POST para enviar a verificar el voucher---------------------------
+
+  rateService(rate:createRate): Observable<Rate> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }),
+    };
+    return this.http
+      .post<Rate>(this.apiURL + 'rateservice/'+rate.id,rate, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
   //Petición GET para obtener el voucher de pago del servicio---------------------------

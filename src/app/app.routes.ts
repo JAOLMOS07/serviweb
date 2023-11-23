@@ -3,6 +3,7 @@ import { AuthService } from './auth/services/auth.service';
 import { ServiceService } from './service/services/service.service';
 import { sessionGuard } from './auth/guards/session.guard';
 import { loggedInGuard } from './service/guards/loggedInGuard';
+import { AdminService } from './admin/services/admin.service';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
@@ -80,12 +81,36 @@ export const routes: Routes = [
          (comp) => comp.ServiceProcessComponent
        ),
    },{
+    path: 'worker/proceso/:serviceId',
+     providers: [AuthService,ServiceService],
+     /* canMatch: [loggedInGuard], */
+     loadComponent: () =>
+       import('./service/pages/service-process/service-process.component').then(
+         (comp) => comp.ServiceProcessComponent
+       ),
+   },{
     path: 'client/services',
      providers: [AuthService,ServiceService],
      /* canMatch: [loggedInGuard], */
      loadComponent: () =>
        import('./service/pages/services/services.component').then(
          (comp) => comp.ServicesComponent
+       ),
+   },{
+    path: 'worker/services',
+     providers: [AuthService,ServiceService],
+     /* canMatch: [loggedInGuard], */
+     loadComponent: () =>
+       import('./service/pages/services-worker/services-worker.component').then(
+         (comp) => comp.ServicesWorkerComponent
+       ),
+   },{
+    path: 'admin/vouchers',
+     providers: [AuthService,AdminService],
+     /* canMatch: [loggedInGuard], */
+     loadComponent: () =>
+       import('./admin/pages/veryfy-vouchers/veryfy-vouchers.component').then(
+         (comp) => comp.VeryfyVouchersComponent
        ),
    },
   {

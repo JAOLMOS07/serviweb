@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../../services/service.service';
-import { Service, Rate } from '../../service';
+import { Service, Rate,createRate } from '../../service';
 import { ServiceItemComponent } from '../../components/service-item/service-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileComponent } from '../../components/profile/profile.component';
@@ -28,6 +28,7 @@ export class ServiceProcessComponent implements OnInit {
   service!: Service;
   user!: User;
   rate!: Rate;
+  rateC!:createRate;
   context:number=3;
   router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -41,7 +42,6 @@ export class ServiceProcessComponent implements OnInit {
         (res: User) => {
           // El servicio es correcto y puede er renderizado
           this.user = res;
-
         },
         (error: any) => {
           //Algun error al obtener el servicio
@@ -86,6 +86,22 @@ export class ServiceProcessComponent implements OnInit {
     return this.form.controls;
   }
   submit(): void {
+    this.rateC = {
+      "id":this.rate.id,
+      "rate":this.form.value.rate,
+      "comment":this.form.value.comment,
+    }
 
+    this.serviceService.rateService(this.rateC).subscribe(
+      (res: Rate) => {
+        // El servicio es correcto y el usuario puede ser renderizado
+        this.rate = res;
+        console.log(this.rate)
+      },
+      (error: any) => {
+        //Algun error al obtener el servicio
+        console.error('ERROR obteniendo el servicio ', error.message);
+      }
+    )
   }
 }

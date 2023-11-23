@@ -18,7 +18,7 @@
             <div
             [ngClass]="{
               'c-client bg-client': this.context === 1 || this.context === 4 || this.context === 5,
-              'c-worker bg-worker': this.context === 2 || this.context === 3
+              'c-worker bg-worker': this.context === 2 || this.context === 3 || this.context === 6
             }"
               class="d-flex justify-content-around rounded-3 p-2 mb-2 text-center"
             >
@@ -27,7 +27,7 @@
               </div>
               <div [ngClass]="{
                 'c-client ': this.context === 1 || this.context === 4 || this.context === 5,
-                'c-worker ': this.context === 2 || this.context === 3
+                'c-worker ': this.context === 2 || this.context === 3 || this.context === 6
               }" class="px-3">
                 <p class="small  mb-1">{{ service.name }}</p>
                 <p class="m-3">{{ service.Description }}</p>
@@ -49,8 +49,8 @@
                 {{ this.title }}
               </button>
             </div>
-            <div *ngIf="this.context === 5" class="btn-group col-12" role="group" aria-label="Basic outlined example">
-              <button type="button" (click)="SelectServiceVoucher(service)" class="btn btn-secondary">Voucher</button>
+            <div *ngIf="this.context >= 5" class="btn-group col-12" role="group" aria-label="Basic outlined example">
+              <button *ngIf="this.context === 5" type="button" (click)="SelectServiceVoucher(service)" class="btn btn-secondary">Voucher</button>
               <button type="button" (click)="SelectServiceProceso(service)" class="btn btn-primary-worker" [disabled]="!service.confirmed">Proceso</button>
               <button type="button" (click)="SelectServiceReport(service)" class="btn btn-danger">Reporte</button>
             </div>

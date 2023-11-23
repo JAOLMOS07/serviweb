@@ -6,11 +6,11 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { ServiceService } from '../../services/service.service';
 import { Service } from '../../service';
 import { ServiceItemComponent } from '../../components/service-item/service-item.component';
-import { Router } from '@angular/router';
+import { Router,RouterModule } from '@angular/router';
 @Component({
   selector: 'app-worker',
   standalone: true,
-  imports: [CommonModule, ProfileComponent,ServiceItemComponent],
+  imports: [CommonModule,RouterModule, ProfileComponent,ServiceItemComponent],
   templateUrl: './worker.component.html',
   styleUrls: ['./worker.component.scss']
 })

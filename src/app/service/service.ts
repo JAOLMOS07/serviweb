@@ -37,8 +37,9 @@ export interface Voucher {
 }
 
 export interface Rate {
-  rate_client:number|null,
-  rate_worker:number|null,
+  id:number|null,
+  rate_client:number,
+  rate_worker:number,
   comment_client:string|null,
   comment_worker:string|null,
   service_id:number|null,
@@ -48,4 +49,9 @@ export interface Rate {
 
 }
 
+export interface createRate {
+  id:number|null,
+  rate:number|null,
+  comment:string|null,
+}
 
