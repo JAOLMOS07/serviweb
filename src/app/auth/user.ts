@@ -14,9 +14,12 @@ export interface Credentials {
 export interface Token {
   token: string;
 }
-
+export interface UserInfo {
+  calificación: number;
+  servicios:    number;
+}
 export interface User {
-  id:                number|null;
+  id:                number;
   name:              string|null;
   email:             string|null;
   phone:             string|null;

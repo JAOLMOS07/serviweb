@@ -9,11 +9,11 @@ import {
 import { Credentials, Token } from '../../user';
 import { Router, RouterModule} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-
+import { RatingModule } from 'primeng/rating';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule,RatingModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })

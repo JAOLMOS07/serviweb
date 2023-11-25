@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Credentials, Token, User,status, RegisterCredentials } from '../user';
+import { Credentials, Token, User,status, RegisterCredentials, UserInfo } from '../user';
 
 @Injectable()
 export class AuthService {
@@ -56,6 +56,30 @@ export class AuthService {
       .post<User>(this.apiURL + 'get-user', {token:this.getToken()}, this.httpOptions)
       .pipe(map((resp:any) => resp.user),catchError(this.errorHandler));
   }
+  //Petición GET para obtener el usuario que está con la sesión activa---------------------------
+  getRateClient(user: number): Observable<UserInfo> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      }),
+    };
+    return this.http
+      .get<UserInfo>(this.apiURL + 'client/getrate/'+user, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+    //Petición GET para obtener el usuario que está con la sesión activa---------------------------
+    getRateWorker(user: number): Observable<UserInfo> {
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.getToken()}`,
+        }),
+      };
+      return this.http
+        .get<UserInfo>(this.apiURL + 'worker/getrate/'+user, this.httpOptions)
+        .pipe(catchError(this.errorHandler));
+    }
 //Petición GET para verificar el token-------------------------------------------------------------
 validateToken(): Observable<boolean> {
 

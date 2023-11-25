@@ -11,7 +11,9 @@ import {
   FormControl,
   Validators,
   ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
+import { RatingModule } from 'primeng/rating';
 @Component({
   selector: 'app-service-process',
   standalone: true,
@@ -20,6 +22,8 @@ import {
     ServiceItemComponent,
     ProfileComponent,
     ReactiveFormsModule,
+    RatingModule,
+    FormsModule
   ],
   templateUrl: './service-process.component.html',
   styleUrls: ['./service-process.component.scss'],
@@ -30,6 +34,7 @@ export class ServiceProcessComponent implements OnInit {
   rate!: Rate;
   rateC!:createRate;
   context:number=3;
+
   router = inject(Router);
   private route = inject(ActivatedRoute);
   private serviceService = inject(ServiceService);

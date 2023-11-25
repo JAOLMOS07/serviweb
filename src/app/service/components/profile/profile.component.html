@@ -11,6 +11,7 @@
             <img
               src="../../../../assets/avatar.svg"
               class="img-fluid"
+              alt="img"
               style="width: 180px; border-radius: 10px"
             />
           </div>
@@ -25,11 +26,11 @@
             >
               <div>
                 <p class="small text-muted mb-1">Servicios</p>
-                <p class="mb-0">41</p>
+                <p class="mb-0">{{this.services}}</p>
               </div>
               <div>
                 <p class="small text-muted mb-1">Calificación</p>
-                <p class="mb-0">8.5</p>
+                <p-rating [(ngModel)]="calification" [readonly]="true" [cancel]="false"></p-rating>
               </div>
             </div>
             <div *ngIf="context <=2 " class="d-flex pt-1">
