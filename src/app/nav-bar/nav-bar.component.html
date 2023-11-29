@@ -11,17 +11,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/client" routerLinkActive="active">Cliente</a>
+          <a *ngIf="session$|async" class="nav-link active" aria-current="page" routerLink="/client" routerLinkActive="active">Cliente</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/worker" routerLinkActive="active">Trabajador</a>
+          <a  *ngIf="session$|async" class="nav-link" routerLink="/worker" routerLinkActive="active">Trabajador</a>
         </li>
 
 
       </ul>
 
 
-        <button (click)="logOut()" class="btn btn-outline-danger">Cerrar Sesión</button>
+        <button *ngIf="session$|async" (click)="logOut()" class="btn btn-outline-danger">Cerrar Sesión</button>
 
     </div>
   </div>

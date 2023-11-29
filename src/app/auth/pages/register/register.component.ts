@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryComponent } from 'src/app/category/category.component';
 import { Category } from 'src/app/category/Category';
@@ -27,8 +27,9 @@ export class RegisterComponent implements OnInit {
   workerSelected: boolean = false;
   credentials!: RegisterCredentials;
   categoriesSelected:Category[] = [] ;
+  private authService = inject(AuthService)
+  private router = inject(Router)
 
-  constructor(private authService: AuthService,private router: Router) {}
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),

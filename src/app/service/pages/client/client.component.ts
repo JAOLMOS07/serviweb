@@ -23,6 +23,8 @@ export class ClientComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
     this.authService.getUser().subscribe(
       (res: User) => {
         // El inicio de sesión fue exitoso, manejamos la respuesta

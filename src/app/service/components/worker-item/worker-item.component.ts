@@ -5,11 +5,11 @@ import { RatingModule } from 'primeng/rating';
 import { EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormsModule } from '@angular/forms';
-
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-worker-item',
   standalone: true,
-  imports: [CommonModule,RatingModule, FormsModule],
+  imports: [CommonModule,RatingModule, FormsModule,TooltipModule],
   templateUrl: './worker-item.component.html',
   styleUrls: ['./worker-item.component.scss']
 })
@@ -18,6 +18,7 @@ export class workerItemComponent {
 @Input() context!:number;
 authService = inject(AuthService);
 calification:number=0;
+services:number=0;
 
 @Output() applicantEvent = new EventEmitter<Applicant>();
 ngOnChanges(): void {
@@ -26,7 +27,7 @@ ngOnChanges(): void {
       (res: UserInfo) => {
         // El servicio es correcto y puede er renderizado
         this.calification = res.calificación;
-
+        this.services = res.servicios;
       },
       (error: any) => {
         //Algun error al obtener el servicio

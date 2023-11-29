@@ -31,6 +31,14 @@ export const routes: Routes = [
       import('./service/pages/client/client.component').then(
         (comp) => comp.ClientComponent
       ),
+  },  {
+    path: 'user/update',
+    providers: [AuthService,ServiceService],
+    canMatch: [loggedInGuard],
+    loadComponent: () =>
+      import('./service/pages/update-user/update-user.component').then(
+        (comp) => comp.UpdateUserComponent
+      ),
   },
   {
  path: 'worker/postularse/:serviceId',

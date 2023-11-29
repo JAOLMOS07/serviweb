@@ -6,6 +6,12 @@ export interface RegisterCredentials {
   role_id:number
   categories: number[]|null
 }
+
+export interface UpdateCredentials {
+  name: string;
+  email: string;
+  phone: string|null;
+}
 export interface Credentials {
   email: string;
   password: string;

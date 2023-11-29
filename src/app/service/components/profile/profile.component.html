@@ -30,7 +30,10 @@
               </div>
               <div>
                 <p class="small text-muted mb-1">Calificación</p>
-                <p-rating [(ngModel)]="calification" [readonly]="true" [cancel]="false"></p-rating>
+                <div class="d-flex align-items-center justify-content-around">
+                  <p-rating [(ngModel)]="calification" [readonly]="true" [cancel]="false"></p-rating><h6 class="p-1">{{calification}}</h6>
+                </div>
+
               </div>
             </div>
             <div *ngIf="context <=2 " class="d-flex pt-1">
@@ -51,6 +54,7 @@
                   ' btn-primary-worker': this.context === 2
                 }"
                 class="btn flex-grow-1"
+                routerLink="/user/update"
               >
                 Editar Perfil
               </button>

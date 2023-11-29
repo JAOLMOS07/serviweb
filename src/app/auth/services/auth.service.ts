@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Credentials, Token, User,status, RegisterCredentials, UserInfo } from '../user';
+import { Credentials, Token, User,status, RegisterCredentials, UserInfo, UpdateCredentials } from '../user';
+import { SharingService } from './sharing.service';
 
 @Injectable()
 export class AuthService {
   //dirección http base de mi API
   private apiURL = 'http://apiserviapp.test/api/v1/';
+  private sharingservice = inject(SharingService);
 
   //Headers de mi peticion http
   httpOptions = {
@@ -24,11 +26,14 @@ export class AuthService {
 
   //Guardar token en el local storage------------------------------------------------------------
   setToken(token: Token): void {
+    this.sharingservice.sharingObservableData = true;
     localStorage.setItem('token', JSON.stringify(token.token));
   }
 
   //Borrar local storage-------------------------------------------------------------------------
   deleteToken(): void {
+    this.sharingservice.sharingObservableData = false;
+
     localStorage.removeItem('token');
   }
   //Petición POST para cerrar sesión---------------------------
@@ -115,6 +120,12 @@ validateToken(): Observable<boolean> {
   Register(credentials: RegisterCredentials): Observable<Token> {
     return this.http
       .post<Token>(this.apiURL + 'register', credentials, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+  //Petición POST para Registrar usuario------------------------------------------------------------
+  Update(credentials: UpdateCredentials): Observable<User> {
+    return this.http
+      .post<User>(this.apiURL + 'user/update', credentials, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
   //Petición POST para crear cliente------------------------------------------------------------

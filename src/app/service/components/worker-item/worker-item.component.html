@@ -1,35 +1,53 @@
-<div class="container-fluid"> <!-- minimo 730px de ancho -->
+<div class="container-fluid">
+  <!-- minimo 730px de ancho -->
   <div class="row d flex justify-content-center align-items-center">
     <div
       class="card col-sm-10 col-lg-8 col-sm-8 bg-white shadow py-3 px-4 m-3"
       style="border-radius: 15px"
     >
       <div class="card-body p-4">
-        <div class="d-flex text-black  align-items-center">
+        <div class="d-flex text-black align-items-center">
           <div class="flex-shrink-0">
             <img
-            alt="img"
+              alt="img"
               src="../../../../assets/avatar.svg"
               class="img-fluid"
               style="width: 100px; border-radius: 10px"
             />
           </div>
           <div class="flex-grow-1 ms-3">
-            <p-rating [(ngModel)]="calification" [readonly]="true" [cancel]="false"></p-rating>
+            <div class="d-flex align-items-center justify-content-around">
+              <div class="d-flex align-items-center">
+                <p-rating
+                [(ngModel)]="calification"
+                [readonly]="true"
+                [cancel]="false"
+              ></p-rating>
+              <h6 class="p-1">{{ calification }}</h6>
+              </div>
+              <div class="d-flex align-items-center">
+                <img src="../../../../assets/servicios.png"
+                pInputText pTooltip="Servicios realizados"
+                 alt="servicios" height="25px" >
+                <h6 class="p-1">{{ services}}</h6>
+              </div>
 
-            <h5 class="mb-1">{{this.applicant.name}}</h5>
 
-            <p class="mb-2 pb-1" style="color: #2b2a2a">{{this.applicant.price| currency: 'USD'}}</p>
-            <div *ngIf="context===1" class="d-flex pt-1">
+            </div>
+
+            <h5 class="mb-1">{{ this.applicant.name }}</h5>
+
+            <p class="mb-2 pb-1" style="color: #2b2a2a">
+              {{ this.applicant.price | currency : "USD" }}
+            </p>
+            <div *ngIf="context === 1" class="d-flex pt-1">
               <button
-
-              (click)="SelectApplicant(applicant)"
+                (click)="SelectApplicant(applicant)"
                 type="button"
                 class="btn btn-outline-primary-worker me-1 flex-grow-1"
               >
                 Aceptar
               </button>
-
             </div>
           </div>
         </div>

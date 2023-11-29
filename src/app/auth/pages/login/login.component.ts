@@ -10,6 +10,7 @@ import { Credentials, Token } from '../../user';
 import { Router, RouterModule} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import { RatingModule } from 'primeng/rating';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -26,11 +27,12 @@ export class LoginComponent implements OnInit {
   router = inject(Router);
 
   ngOnInit(): void {
+
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
-    console.log(this.authService.getToken().length);
+
   }
 
   get f() {
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.credentials).subscribe((res: Token) => {
       // El inicio de sesión fue exitoso, manejamos la respuesta
+
       this.authService.setToken(res);
       this.router.navigateByUrl('/client');
     });

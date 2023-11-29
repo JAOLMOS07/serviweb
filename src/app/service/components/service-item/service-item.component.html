@@ -13,8 +13,7 @@
             />
           </div>
           <div class="flex-grow-1 ms-3">
-            <h5 class="mb-1"></h5>
-            <p class="mb-2 pb-1" ></p>
+
             <div
             [ngClass]="{
               'c-client bg-client': this.context === 1 || this.context === 4 || this.context === 5,
@@ -29,7 +28,7 @@
                 'c-client ': this.context === 1 || this.context === 4 || this.context === 5,
                 'c-worker ': this.context === 2 || this.context === 3 || this.context === 6
               }" class="px-3">
-                <p class="small  mb-1">{{ service.name }}</p>
+                <h5 class="  mb-1">{{ service.name }}</h5>
                 <p class="m-3">{{ service.Description }}</p>
               </div>
               <div>

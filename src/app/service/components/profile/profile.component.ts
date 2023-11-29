@@ -5,10 +5,11 @@ import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Service } from '../../service';
+import { Router,RouterModule,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RatingModule, FormsModule],
+  imports: [CommonModule, RatingModule, FormsModule,RouterModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   @Input() User!: User;
   @Input() Service!: Service;
   @Input() context!: number;
+  private router = inject(Router);
   authService = inject(AuthService);
   calification: number = 0;
   services: number = 0;
@@ -24,7 +26,7 @@ export class ProfileComponent implements OnInit {
   ngOnChanges(): void {
     if (this.User) {
       if (this.context === 1) {
-        this.title = '-Cliente';
+        this.title = '- Cliente';
         this.authService.getRateClient(this.User.id).subscribe(
           (res: UserInfo) => {
             // El servicio es correcto y puede er renderizado
@@ -83,6 +85,9 @@ export class ProfileComponent implements OnInit {
         }
       }
     }
+  }
+  goEdit():void{
+    this.router.navigateByUrl('client');
   }
   ngOnInit(): void {}
 }
