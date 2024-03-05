@@ -6,8 +6,10 @@
       class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
       style="border-radius: 15px"
     >
-    <app-item-service [service]="service" [context]="4"></app-item-service>
-      <div class="col-6 pt-4 justify-content-center align-items-center">
+      <app-item-service [service]="service" [context]="4"></app-item-service>
+      <div
+        class="col-12 col-sm-6 pt-4 justify-content-center align-items-center"
+      >
         <div class="text-center">
           <p>
             En esta sección podras ver a todos los aplicantes actuales a tu
@@ -17,7 +19,9 @@
           </p>
         </div>
       </div>
-      <div class="col-6 justify-content-center align-items-center">
+      <div
+        class="col-6 justify-content-center align-items-center d-none d-sm-flex"
+      >
         <img
           src="../../../../assets/supervision2.png"
           alt="img"
@@ -27,12 +31,16 @@
       <hr class="m-2" />
       <ul *ngIf="applicants" class="list-group">
         <li *ngFor="let applicant of applicants">
-          <app-worker-item [applicant]="applicant" [context]="1" (applicantEvent)="SelectApplicant($event)"></app-worker-item>
+          <app-worker-item
+            [applicant]="applicant"
+            [context]="1"
+            (applicantEvent)="SelectApplicant($event)"
+          ></app-worker-item>
         </li>
         <div class="container-fluid">
           <div class="row d flex justify-content-center align-items-center">
             <div
-              class="row col-6 bg-white shadow-sm py-3 px-4 m-1 text-center"
+              class="row col-12 col-lg-6 bg-white shadow-sm py-3 px-4 m-1 text-center"
               style="border-radius: 15px"
             >
               <button class="btn btn-primary">Cancelar servicio</button>

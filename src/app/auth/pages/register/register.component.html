@@ -3,7 +3,7 @@
     class="row justify-content-center align-items-center"
     style="min-height: 100vh"
   >
-    <div class="col-6 col-sm-8 col-lg-6">
+    <div class="col-12 col-sm-8 col-lg-6">
       <div class="bg-white shadow rounded py-3 px-4">
         <h1 class="text-center display-4 mb-0">Registrarse</h1>
 
@@ -144,9 +144,7 @@
               <button
                 class="btn btn-primary col-6"
                 type="submit"
-                [disabled]="
-                  (!form.valid )
-                "
+                [disabled]="!form.valid"
               >
                 Registrar
               </button>

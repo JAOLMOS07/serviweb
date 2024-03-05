@@ -1,41 +1,51 @@
 <div class="container-fluid">
-  <!-- minimo 730px de ancho -->
-  <div class="row d flex justify-content-center align-items-center">
+  <div class="row d-flex justify-content-center align-items-center">
     <div class="card col-12 bg-white shadow m-3" style="border-radius: 15px">
-      <!-- <div class="badge text-bg-primary  mt-2" style="text-overflow: ellipsis;">Categoría</div> -->
-      <div class="card-body p-4">
-        <div class="d-flex text-black align-items-center" >
-          <div class="flex-shrink-0">
+      <div class="card-body">
+        <div
+          class="d-flex text-black align-items-center justify-content-center"
+        >
+          <div class="flex-shrink-0 d-none d-lg-flex">
             <img
               src="../../../../assets/serviceimg.png"
+              alt="img"
               class="img-fluid"
               style="width: 180px; border-radius: 10px"
             />
           </div>
-          <div class="flex-grow-1 ms-3">
-
+          <div class="">
             <div
-            [ngClass]="{
-              'c-client bg-client': this.context === 1 || this.context === 4 || this.context === 5,
-              'c-worker bg-worker': this.context === 2 || this.context === 3 || this.context === 6
-            }"
+              [ngClass]="{
+                'c-client bg-client':
+                  this.context === 1 ||
+                  this.context === 4 ||
+                  this.context === 5,
+                'c-worker bg-worker':
+                  this.context === 2 || this.context === 3 || this.context === 6
+              }"
               class="d-flex justify-content-around rounded-3 p-2 mb-2 text-center"
             >
-              <div>
-                <p class="small text-muted mb-1"></p>
-              </div>
-              <div [ngClass]="{
-                'c-client ': this.context === 1 || this.context === 4 || this.context === 5,
-                'c-worker ': this.context === 2 || this.context === 3 || this.context === 6
-              }" class="px-3">
-                <h5 class="  mb-1">{{ service.name }}</h5>
+              <div
+                [ngClass]="{
+                  'c-client ':
+                    this.context === 1 ||
+                    this.context === 4 ||
+                    this.context === 5,
+                  'c-worker ':
+                    this.context === 2 ||
+                    this.context === 3 ||
+                    this.context === 6
+                }"
+                class="px-3"
+              >
+                <h5 class="mb-1">{{ service.name }}</h5>
                 <p class="m-3">{{ service.Description }}</p>
               </div>
-              <div>
-                <p class="small text-muted mb-1"></p>
-              </div>
             </div>
-            <div *ngIf="this.context === 2 ||this.context === 1 " class="d-flex pt-1">
+            <div
+              *ngIf="this.context === 2 || this.context === 1"
+              class="d-flex pt-1"
+            >
               <button
                 type="button"
                 (click)="SelectService(service)"
@@ -48,10 +58,35 @@
                 {{ this.title }}
               </button>
             </div>
-            <div *ngIf="this.context >= 5" class="btn-group col-12" role="group" aria-label="Basic outlined example">
-              <button *ngIf="this.context === 5" type="button" (click)="SelectServiceVoucher(service)" class="btn btn-secondary">Voucher</button>
-              <button type="button" (click)="SelectServiceProceso(service)" class="btn btn-primary-worker" [disabled]="!service.confirmed">Proceso</button>
-              <button type="button" (click)="SelectServiceReport(service)" class="btn btn-danger">Reporte</button>
+            <div
+              *ngIf="this.context >= 5"
+              class="btn-group col-12"
+              role="group"
+              aria-label="Basic outlined example"
+            >
+              <button
+                *ngIf="this.context === 5"
+                type="button"
+                (click)="SelectServiceVoucher(service)"
+                class="btn btn-secondary"
+              >
+                Voucher
+              </button>
+              <button
+                type="button"
+                (click)="SelectServiceProceso(service)"
+                class="btn btn-primary-worker"
+                [disabled]="!service.confirmed"
+              >
+                Proceso
+              </button>
+              <button
+                type="button"
+                (click)="SelectServiceReport(service)"
+                class="btn btn-danger"
+              >
+                Reporte
+              </button>
             </div>
           </div>
         </div>

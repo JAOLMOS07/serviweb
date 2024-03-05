@@ -1,4 +1,3 @@
-
 <app-profile [User]="user" [context]="1" />
 <div class="container-fluid">
   <!-- minimo 730px de ancho -->
@@ -7,7 +6,9 @@
       class="row col-sm-10 col-lg-6 col-sm-8 bg-white shadow py-3 px-4 m-3 text-center"
       style="border-radius: 15px"
     >
-      <div class="col-6 pt-4 justify-content-center align-items-center">
+      <div
+        class="col-16 col-sm-6 pt-4 justify-content-center align-items-center"
+      >
         <div class="text-center">
           <p>
             ¿Necesitas un servicio? pídelo fácil, completamente a tu gusto, que
@@ -15,10 +16,14 @@
           </p>
         </div>
         <div class="">
-          <button routerLink="solicitar"  [ngClass]="" class="btn btn-primary">Solicitar servicio</button>
+          <button routerLink="solicitar" [ngClass]="" class="btn btn-primary">
+            Solicitar servicio
+          </button>
         </div>
       </div>
-      <div class="col-6 justify-content-center align-items-center">
+      <div
+        class="col-6 justify-content-center align-items-center d-none d-sm-flex"
+      >
         <img
           src="../../../../assets/supervision.png"
           alt="img"
@@ -28,16 +33,22 @@
       <hr class="m-2" />
       <ul class="list-group">
         <li *ngFor="let service of services">
-          <app-item-service [service]="service"  (ServiceEvent)="SelectService($event)" [context]="1"></app-item-service>
+          <app-item-service
+            [service]="service"
+            (ServiceEvent)="SelectService($event)"
+            [context]="1"
+          ></app-item-service>
         </li>
         <div class="container-fluid">
           <div class="row d flex justify-content-center align-items-center">
             <div
-              class="row col-6 bg-white shadow-sm py-3 px-4 m-1 text-center"
+              class="row col-12 col-sm-6 bg-white shadow-sm py-3 px-4 m-1 text-center"
               style="border-radius: 15px"
             >
-          <button routerLink="/client/services" class="btn btn-primary">Ver todos los servicios</button>
-          </div>
+              <button routerLink="/client/services" class="btn btn-primary">
+                Ver todos los servicios
+              </button>
+            </div>
           </div>
         </div>
       </ul>

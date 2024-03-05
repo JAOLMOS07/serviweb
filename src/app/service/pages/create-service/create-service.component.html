@@ -3,7 +3,7 @@
     class="row justify-content-center align-items-center"
     style="min-height: 100vh"
   >
-    <div class="col-6 col-sm-8 col-lg-6">
+    <div class="col-12 col-lg-6">
       <div class="bg-white shadow rounded py-3 px-4">
         <h1 class="text-center display-4 mb-0">Solicitud de Servicio</h1>
         <hr />
@@ -29,7 +29,8 @@
             </div>
           </div>
           <div class="form-floating m-3">
-            <textarea style="min-height: 200px; max-height: 400px;"
+            <textarea
+              style="min-height: 200px; max-height: 400px"
               id="description"
               class="md-textarea form-control"
               formControlName="description"
@@ -51,8 +52,7 @@
           </div>
 
           <div class="row justify-content-center align-items-center">
-            <div class="form-floating col-5">
-
+            <div class="form-floating col-10 col-sm-5 mb-2">
               <input
                 type="number"
                 class="form-control"
@@ -63,9 +63,8 @@
                 required
               />
               <label for="price_min">Precio minimo:</label>
-
             </div>
-            <div class="form-floating col-5">
+            <div class="form-floating col-10 col-sm-5 mb-2">
               <input
                 type="number"
                 class="form-control"
@@ -76,14 +75,13 @@
                 required
               />
               <label for="price_max">Precio máximo:</label>
-
             </div>
           </div>
           <div class="m-3">
             <p>Categorias:</p>
             <app-category
-            (CategoryEvent)="CategorySelected($event)"
-          ></app-category>
+              (CategoryEvent)="CategorySelected($event)"
+            ></app-category>
           </div>
 
           <div class="row m-3">
